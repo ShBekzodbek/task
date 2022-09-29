@@ -30,30 +30,30 @@ router.post("/", async (req, res) => {
   } catch (error) {
     error.statusCode = 404;
     console.error(error);
-  }
+  };
 });
-router.post("/repassword", async (req, res) => {
-  try {
-    const { error } = validateFullname(req.body);
-    if (error) {
-      return res.status(400).send("Invalid fullname or phone");
-    }
-    let newData = await Fullname.find({phone:req.body.phone});
-    if (newData > 0) {
-      return res.status(400).send({ message: "This phone already exist" });
-    }
-    // const {name, email, password} = await User.find();
-    // const {err} = validate({name, email, password});
-    // if(err){
-    //   return res.status(400).send({ message: "This phone already exist" });
-    // }
-    newData = new Fullname(_.pick(req.body, ["fullname", "phone"]));
-    await newData.save();
-    return res.status(201).send("User  created successfully");
-  } catch (error) {
-    error.statusCode = 404;
-    console.error(error);
-  }
-});
+// router.post("/repassword", async (req, res) => {
+//   try {
+//     const { error } = validateFullname(req.body);
+//     if (error) {
+//       return res.status(400).send("Invalid fullname or phone");
+//     }
+//     let newData = await Fullname.find({phone:req.body.phone});
+//     if (newData > 0) {
+//       return res.status(400).send({ message: "This phone already exist" });
+//     }
+//     // const {name, email, password} = await User.find();
+//     // const {err} = validate({name, email, password});
+//     // if(err){
+//     //   return res.status(400).send({ message: "This phone already exist" });
+//     // }
+//     newData = new Fullname(_.pick(req.body, ["fullname", "phone"]));
+//     await newData.save();
+//     return res.status(201).send("User  created successfully");
+//   } catch (error) {
+//     error.statusCode = 404;
+//     console.error(error);
+//   }
+// });
 
 module.exports = router;
